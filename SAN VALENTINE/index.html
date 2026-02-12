@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family:'Georgia',serif;
+    overflow:hidden;
+    color:white;
+}
+
+.background{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:url('foto.jpg') center/cover no-repeat;
+    filter:brightness(40%);
+    z-index:-2;
+}
+
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+    z-index:-1;
+}
+
+.container{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+    animation:fadeIn 2s ease-in;
+}
+
+h1{
+    font-size:2.5em;
+    margin-bottom:10px;
+}
+
+.note{
+    max-width:600px;
+    font-size:1.2em;
+    line-height:1.6em;
+    margin-top:20px;
+}
+
+.counter{
+    margin-top:25px;
+    font-size:1.4em;
+    font-weight:bold;
+    color:#ffb6c1;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* corazones suaves */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation:floatUp 6s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(0);}
+    to{transform:translateY(-110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<div class="container">
+    <h1>Yuliana ❤️</h1>
+
+    <div class="note">
+        Desde el <b>16 de mayo de 2025</b> comenzó la mejor etapa de mi vida.<br><br>
+        Desde ese día no solo me enamoré de ti…<br>
+        Me enamoro de ti todos los días un poco más.<br><br>
+        Esto no es solo tiempo…<br>
+        Es cada abrazo, cada beso, cada sonrisa compartida.<br><br>
+        Y lo seguiría eligiendo mil veces más.
+    </div>
+
+    <div class="counter" id="contador"></div>
+</div>
+
+<script>
+// FECHA DE INICIO
+const fechaInicio = new Date("2025-05-16T00:00:00");
+
+function actualizarContador(){
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+    const segundos = Math.floor((diferencia / 1000) % 60);
+
+    document.getElementById("contador").innerHTML =
+        `Enamorados por:<br>
+        ${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos ❤️`;
+}
+
+setInterval(actualizarContador,1000);
+
+// Corazones suaves
+function crearCorazon(){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (Math.random()*15 + 15) + "px";
+    heart.style.animationDuration = (Math.random()*3 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
+}
+
+setInterval(crearCorazon,800);
+</script>
+
+</body>
+</html>
